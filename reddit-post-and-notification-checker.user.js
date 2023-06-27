@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name    [Reddit] Post & Notification Checker
 // @author  Aurange
-// @version 1.0
+// @version 1.1
 // @match   https://www.reddit.com/new/
 // @grant   window.close
 // ==/UserScript==
@@ -10,7 +10,7 @@
 
 new MutationObserver(function(mutationList, observer){
   let post = document.querySelector("[data-scroller-first] h3"),
-      chat = document.querySelector("a[href='https://www.reddit.com/chat']"),
+      chat = document.querySelector("[data-testid='reddit-chat-button'] > a"),
       notif = document.querySelector("[aria-label='Open notifications inbox'] > div");
 
   if(post !== null && chat !== null && notif !== null){
