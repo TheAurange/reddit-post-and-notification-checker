@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name    [Reddit] Post & Notification Checker
+// @name    [Reddit] Post & Notification Tracker
 // @author  Aurange
-// @version 1.1
+// @version 1.2
 // @match   https://www.reddit.com/new/
 // @grant   window.close
 // ==/UserScript==
@@ -17,10 +17,7 @@ new MutationObserver(function(mutationList, observer){
     observer.disconnect();
 
     setTimeout(function(){
-      if(localStorage.getItem("post") === null) localStorage.setItem("post", post.innerText);
-      else if(localStorage.getItem("post") !== post.innerText){
-        localStorage.setItem("post", post.innerText);
-      }
+      if(localStorage.getItem("post") === null || localStorage.getItem("post") !== post.innerText) localStorage.setItem("post", post.innerText);
       else if(chat.querySelector("span") === null && notif.querySelector("div > span") === null) window.close();
     }, 1500);
   }
