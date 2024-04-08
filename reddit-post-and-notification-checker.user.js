@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name    [Reddit] Post & Notification Tracker
 // @author  Aurange
-// @version 1.2
+// @version 1.3
 // @match   https://www.reddit.com/new/
 // @grant   window.close
 // ==/UserScript==
@@ -9,16 +9,16 @@
 "use strict";
 
 new MutationObserver(function(mutationList, observer){
-  let post = document.querySelector("[data-scroller-first] h3"),
-      chat = document.querySelector("[data-testid='reddit-chat-button'] > a"),
-      notif = document.querySelector("[aria-label='Open notifications inbox'] > div");
+  let post = document.querySelector("shreddit-feed article");
 
-  if(post !== null && chat !== null && notif !== null){
+  if(!!post){
     observer.disconnect();
 
+    post = post.getAttribute("aria-label");
+
     setTimeout(function(){
-      if(localStorage.getItem("post") === null || localStorage.getItem("post") !== post.innerText) localStorage.setItem("post", post.innerText);
-      else if(chat.querySelector("span") === null && notif.querySelector("div > span") === null) window.close();
+      if(!localStorage.getItem("post") || localStorage.getItem("post") !== post) localStorage.setItem("post", post);
+      else if(Number(document.querySelector("#header-action-item-chat-button-badge").getAttribute("initial-count")) === 0 && !document.querySelector("[data-id='notification-count-element']")) window.close();
     }, 1500);
   }
 }).observe(document, {
