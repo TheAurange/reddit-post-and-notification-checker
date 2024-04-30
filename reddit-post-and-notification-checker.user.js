@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name    [Reddit] Post & Notification Tracker
+// @name    [Reddit] Post Tracker
 // @author  Aurange
-// @version 1.3
+// @version 1.0
 // @match   https://www.reddit.com/new/
 // @grant   window.close
 // ==/UserScript==
@@ -16,10 +16,8 @@ new MutationObserver(function(mutationList, observer){
 
     post = post.getAttribute("aria-label");
 
-    setTimeout(function(){
-      if(!localStorage.getItem("post") || localStorage.getItem("post") !== post) localStorage.setItem("post", post);
-      else if(Number(document.querySelector("#header-action-item-chat-button-badge").getAttribute("initial-count")) === 0 && !document.querySelector("[data-id='notification-count-element']")) window.close();
-    }, 1500);
+    if(!localStorage.getItem("post") || localStorage.getItem("post") !== post) localStorage.setItem("post", post);
+    else window.close();
   }
 }).observe(document, {
   childList: true,
