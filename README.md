@@ -1,3 +1,3 @@
-# reddit-post-and-notification-checker
-A userscript to automatically check if there is any new posts or notifications.  
+# reddit-post-tracker
+A userscript to automatically check if there is any new posts on your Reddit new posts feed.  
 Author: Aurange
