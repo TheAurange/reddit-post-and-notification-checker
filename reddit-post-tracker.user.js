@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name    [Reddit] Post Tracker
 // @author  Aurange
-// @version 1.0
+// @version 1.1
 // @match   https://www.reddit.com/new/
 // @grant   window.close
 // ==/UserScript==
@@ -14,9 +14,11 @@ new MutationObserver(function(mutationList, observer){
   if(!!post){
     observer.disconnect();
 
+    let lSP = localStorage.getItem("post");
+
     post = post.getAttribute("aria-label");
 
-    if(!localStorage.getItem("post") || localStorage.getItem("post") !== post) localStorage.setItem("post", post);
+    if(!lSP || post !== lSP) localStorage.setItem("post", post);
     else window.close();
   }
 }).observe(document, {
